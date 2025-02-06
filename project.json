@@ -1,0 +1,56 @@
+{
+  "name": "nx-node-22-typescript-5-8-require-esm",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "includedScripts": [],
+  "sourceRoot": "src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "webpack-cli build",
+        "args": [
+          "node-env=production"
+        ]
+      },
+      "configurations": {
+        "development": {
+          "args": [
+            "node-env=development"
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": [
+        "build"
+      ],
+      "options": {
+        "buildTarget": "nx-node-22-typescript-5-8-require-esm:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "nx-node-22-typescript-5-8-require-esm:build:development"
+        },
+        "production": {
+          "buildTarget": "nx-node-22-typescript-5-8-require-esm:build:production"
+        }
+      }
+    },
+    "test": {
+      "options": {
+        "passWithNoTests": true
+      }
+    },
+    "docker-build": {
+      "dependsOn": [
+        "build"
+      ],
+      "command": "docker build -f Dockerfile . -t nx-node-22-typescript-5-8-require-esm"
+    }
+  }
+}
