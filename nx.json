@@ -31,13 +31,16 @@
       "options": {
         "targetName": "lint"
       }
-    },
-    {
-      "plugin": "@nx/jest/plugin",
-      "options": {
-        "targetName": "test"
-      },
-      "exclude": ["e2e/**/*"]
     }
-  ]
+  ],
+  "targetDefaults": {
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+        ]
+      }
+    }
+  }
 }
