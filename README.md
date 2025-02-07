@@ -3,7 +3,8 @@
 This applicaiton requires node 22.12.0 or higher.
 
 ```sh
-npm install
+# Require force because we are using beta typescript version which doesn't match peerDependency requirements of dependencies.
+npm install --force
 npx nx serve
 ```
 
